@@ -1505,8 +1505,20 @@ input:checked + .toggle-bg {
   background-color: rgb(255 255 255 / 0.5);
 }
 
+.bg-current {
+  background-color: currentColor;
+}
+
 .bg-cover {
   background-size: cover;
+}
+
+.bg-contain {
+  background-size: contain;
+}
+
+.bg-clip-border {
+  background-clip: border-box;
 }
 
 .p-1 {
