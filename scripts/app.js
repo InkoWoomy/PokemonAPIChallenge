@@ -64,6 +64,11 @@
     let dataArray = [];
 
     const MainImageToggle = async () => {
+        mainImage.src = pokemonNormal;
+        shinyButton.classList.remove('bg-yellow-500');
+        shinyButton.classList.add('bg-slate-600');
+        isShiny = false;
+        
         shinyToggle.addEventListener('click', async function (event) {
             // Check if pokemonShiny is defined before setting the image source
             if (isShiny) {
@@ -107,6 +112,8 @@
                 //displays normal version of pokemon
                 mainImage.src = returnData.sprites.other.home.front_default;    
 
+                MainImageToggle();
+                
                 //Display Pokedex Number and Name
                 const paddedId = String(returnData.id).padStart(3, '0');
 
@@ -185,4 +192,5 @@
 
     PokemonData();
     MainImageToggle();
+    
 
