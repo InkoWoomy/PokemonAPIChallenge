@@ -20,6 +20,11 @@
     let pokemonNormal;
     let pokemonShiny;
     let isShiny = false;
+    let evoList = [];
+    let favoriteList = [];
+    let speciesBaseData;
+    let evoData;
+    
 
 
     //functions
@@ -56,6 +61,34 @@
         return localData;
     }
 
+     //calls for evoloution chains for the pokemon
+     async function ChainCall(dataPull){
+        let dataUse = dataPull;
+        const evoPromise = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dataUse}/`);
+        const evoData = await evoPromise.json();
+        const evolutionChainId = evoData.evolution_chain.url.split('/').slice(-2, -1)[0];
+        const chainPromise = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${evolutionChainId}/`);
+        const chainData = await chainPromise.json();
+        return chainData;
+    }
+
+
+    //Calls Species Data (For evolution process)
+    async function SpeciesDataCall(dataPull){
+        let dataUse = dataPull;
+        const speciesPromise = await fetch(speciesBaseData);
+        const speciesData = await speciesPromise.json();
+        return speciesData;
+    }
+
+     //Calls Species Data (For evolution process)
+     async function EvolutionDataCall(dataPull){
+        let dataUse = dataPull;
+        const speciesPromise = await fetch(speciesData);
+        const speciesData = await speciesPromise.json();
+        return speciesData;
+    }
+
 
 
 
@@ -64,23 +97,23 @@
     let dataArray = [];
 
     const MainImageToggle = async () => {
-        mainImage.src = pokemonNormal;
         shinyButton.classList.remove('bg-yellow-500');
-        shinyButton.classList.add('bg-slate-600');
+        shinyButton.classList.add('bg-slate-400');
         isShiny = false;
         
         shinyToggle.addEventListener('click', async function (event) {
-            // Check if pokemonShiny is defined before setting the image source
-            if (isShiny) {
-                mainImage.src = pokemonNormal;
-                shinyButton.classList.toggle('bg-yellow-500');
-                shinyButton.classList.toggle('bg-slate-600');
-            }else{
-                mainImage.src = pokemonShiny;
-                shinyButton.classList.toggle('bg-slate-600');
-                shinyButton.classList.toggle('bg-yellow-500');
-                shinySound.play();
-            }
+
+                
+        if (isShiny) {
+            mainImage.src = pokemonNormal;
+            shinyButton.classList.toggle('bg-yellow-500');
+            shinyButton.classList.toggle('bg-slate-400');
+        }else{
+            mainImage.src = pokemonShiny;
+            shinyButton.classList.toggle('bg-slate-400');
+            shinyButton.classList.toggle('bg-yellow-500');
+            shinySound.play();
+        }
 
             isShiny = !isShiny;
 
@@ -88,8 +121,25 @@
         });
     }
 
+    
+    // const displayEvolutionChain = async (dataPull) => {
+        
+    //     dataPull.chain.evolves_to.forEach(element, index {
+    //         evoList += formatTerm(element);
 
-  
+    //         // Check if it's not the last element before adding a comma
+    //         if (index < returnData.abilities.length - 1) {
+    //             abilitiesList += ", \n";
+    //         }
+    //     });
+        
+        
+
+    // }
+
+
+    
+
 
     const PokemonData = async () => {
         userInput.addEventListener('keydown', async function(event) {
@@ -97,12 +147,20 @@
                 const returnData = await PokemonCall(userInput.value.toLowerCase());
                 
                 const localData = await LocationCall(userInput.value.toLowerCase());
+
+                const chainData = await ChainCall(userInput.value.toLowerCase());
+
+                // displayEvolutionChain(chainData, userInput.value.toLowerCase());
                 
                 userInput.value = '';
-                console.log(returnData.name);
+
+                console.clear();
+
                 console.log(returnData);
 
                 console.log(localData);
+
+                console.log(chainData);
 
                 //pulls normal version of pokemon
                 pokemonNormal = returnData.sprites.other.home.front_default;
@@ -122,7 +180,7 @@
 
                 //Pokemon Type
                 type1.textContent = capitalizeFirstLetter(returnData.types[0].type.name);
-                console.log(returnData.types);
+                
 
                 if (returnData.types.length === 1){
                     type2.textContent = 'N/A';
@@ -180,16 +238,24 @@
                 moveset.textContent = "\n" + moveList;
 
                 //Evolution Chain
-                
+                let evoList = '';
 
+                speciesBaseData = chainData.chain.species.url;
+                
+                const speciesPull = SpeciesDataCall();
+
+               
+
+                // displayEvolutionChain(chainData);
                 
             }
         });
     }
 
-    console.log(PokemonData());
+    
 
+  
     PokemonData();
-    MainImageToggle();
+    
     
 

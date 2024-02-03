@@ -6,25 +6,26 @@
   <link href="./dist/output.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+  <link rel="icon" href="./assets/Poké_Ball_battle_IV.png" type="image/x-icon"/>
   <title>Soria, A - Pokedex With API</title>
 </head>
 
-<body background="./assets/SwShBg-4.png" class="bg flex flex-col h-screen" id="bgImage">
+<body background="./assets/SwShBg-4.png" class="bg-fixed flex-col" id="bgImage">
 
-  <div class="mt-8 flex justify-center">
-    <div class="grid grid-cols-2 gap-4 mt-8">
+  <div class="mt-1 flex justify-center">
+    <div class="grid lg:grid-cols-2 gap-4 mt-8 max-w-screen-xl ">
       
       <div>
-        <div class="rounded-md px-5 py-10 bg-red-300 text-4xl" >
+        <div class="rounded-md px-5 py-5 bg-red-300 text-4xl " >
             National Pokédex
         </div>
+        <input type="text" id="userInput" name="name" placeholder="Enter name or number" class="mt-1 rounded-md w-full"/>
         
-          <input type="text" id="userInput" name="name" placeholder="Enter name or number"/>
-        
-        <img id="mainImage" class="max-w-[360px] self-end">
+        <img id="mainImage" class="justify-normal min-w-full">
+          
         
         <div>
-          <button type="button" class="text-white bg-slate-600 font-medium rounded-full text-sm p-2 mt-10 me-2 mb-2" id="shinyButton">
+          <button type="button" class="text-white hover:bg-slate-300 bg-slate-400 font-medium rounded-full text-sm p-2 mt-10 me-2 mb-2 " id="shinyButton">
             <img src="./assets/shiny.png" class="size-12" alt="Shiny Pokemon" id="shinyToggle">
           </button>
         </div>
@@ -50,11 +51,11 @@
 
 
   <div class="rounded-md bg-slate-200 text-4xl"> 
-    <div class="grid grid-cols-4 mb-10">
-      <div class=" text-white bg-slate-500 text-center rounded-full text-4xl m-5 mb-2" id="type1">
+    <div class="grid grid-cols-2 mb-2">
+      <div class=" text-white bg-slate-500 text-center rounded-full text-4xl m-2 mb-2" id="type1">
         Type 1
       </div>
-      <div class=" text-white bg-slate-500 text-center rounded-full text-4xl m-5 mb-2" id="type2">
+      <div class=" text-white bg-slate-500 text-center rounded-full text-4xl m-2 mb-2" id="type2">
         Type 2
       </div>
     </div>
@@ -63,20 +64,20 @@
   </div>
 
   <div class="rounded-md px-5 bg-slate-200 text-4xl"> 
-    <div class="grid grid-cols-4 mb-10">
-      <div class="col-span-2 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 mx-1 m-3 max-h-[200px] overflow-y-auto" id="locationData">
+    <div class="grid grid-cols-4 mb-2">
+      <div class="col-span-2 text-white bg-slate-600 text-center rounded-lg text-4xl p-6 mx-1 m-3 max-h-[200px] overflow-y-auto" id="locationData">
         Can be found in:
       </div>
-      <div class="col-span-2 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 mx-1 m-3 max-h-[200px] overflow-y-auto" id="abilities">
+      <div class="col-span-2 text-white bg-slate-600 text-center rounded-lg text-4xl p-6 mx-1 m-3 max-h-[200px] overflow-y-auto" id="abilities">
         Abilities:
       </div>
     </div>
 
   </div>
 
-  <div class="rounded-md px-5 bg-slate-200 text-4xl"> 
-    <div class="p-1">
-      <div class="col-span-1 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 mx-1 m-3 max-h-[200px] overflow-y-auto" id="moveset">
+  <div class="rounded-md px-5 bg-slate-200 text-4xl "> 
+    <div class="p-1 mb-2">
+      <div class="col-span-1 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 my-3 max-h-[200px] overflow-y-auto" id="moveset">
         Move Data:
       </div>
     </div>
@@ -84,7 +85,7 @@
 
   <div class="rounded-md px-5 bg-slate-200 text-4xl"> 
     <div class="p-1">
-      <div class="col-span-1 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 mx-1 m-3 max-h-[200px] overflow-y-auto" id="evolutions">
+      <div class="col-span-1 text-white bg-slate-600 text-center rounded-lg text-4xl p-5 my-3 max-h-[200px] overflow-y-auto" id="evolutions">
         
       </div>
     </div>
